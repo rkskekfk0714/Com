@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>모두의 레시피</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js">
+
+  function signUpValidation(){
+
+	var id = $("#id").val();
+	var id2 = $("#id2").val();
+	var password = $("#password").val();
+	var password2 = $("#password2").val();
+	var name = $("#name").val();
+	var postcode = $("#postcode").val();
+	var jibunAddress = $("#jibunAddress").val();
+	var detailAddress = $("#detailAddress").val();
+	var birthyear = $("#birthyear").val();
+	var birthmonth = $("#birthmonth").val();
+	var birtdate = $("#birtdate").val();
+	var gender = $("#gender").val();
+	var phone = $("#phone").val();
+	var phone2 = $("#phone2").val();
+	var phone3 = $("#phone3").val();
+	var email1 = $("#email1").val();
+	var email2 = $("#email2").val();
+	var email3 = $("#email3").val();
+
+	if(!id){
+		alert("아이디 입력은 필수입니다.");
+		$("#id").focus();
+	}else if(!password){
+		alert("비밀번호 입력은 필수입니다.");
+		$("#password").focus();
+	}else if(!password2){
+		alert("비밀번호 확인 입력은 필수입니다.");
+		$("#password2").focus();
+	}else if(password != password2){
+		alert("비밀번호가 맞지 않습니다.");
+		$("#password2").focus();
+	}else if(!name){
+		alert("이름 입력은 필수입니다.");
+		$("#name").focus();
+	}else if(!postcode){
+		alert("주소 입력은 필수입니다.");
+		$("#postcode").focus();
+	}else if(!jibunAddress){
+		alert("주소 입력은 필수입니다.");
+		$("#jibunAddress").focus();
+	}else if(!detailAddress){
+		alert("상세 주소 입력은 필수입니다.");
+		$("#detailAddress").focus();
+	}else if(!birthyear){
+		alert("생년 선택은 필수입니다.");
+		$("#birthyear").focus();
+	}else if(!birthmonth){
+		alert("월 선택은 필수입니다.");
+		$("#birthmonth").focus();
+	}else if(!birtdate){
+		alert("일 선택은 필수입니다.");
+		$("#birtdate").focus();
+	}else if(!gender){
+		alert("성별 입력은 필수입니다.");
+		$("#gender").focus();
+	}else if(!phone){
+		alert("번호 입력은 필수입니다.");
+		$("#phone").focus();
+	}else if(!phone2){
+		alert("번호 입력은 필수입니다.");
+		$("#phone2").focus();
+	}else if(!phone3){
+		alert("상세 주소 입력은 필수입니다.");
+		$("#phone3").focus();
+	}else if(!email1){
+		alert("이메일 입력은 필수입니다.");
+		$("#email1").focus();
+	}else if(!email2){
+		alert("이메일 입력은 필수입니다.");
+		$("#email2").focus();
+	}else if(!email3){
+		alert("이메일 입력은 필수입니다.");
+		$("#email3").focus();
+	}else {
+		signUp()
+	}
+
+
+	}else if(!email){
+		alert("이메일 입력은 필수입니다.");
+		$("#email").focus();
+	}else {
+		signUp()
+	}
+
+}
+
+function signUp(){
+
+	$.ajax({
+
+		url : "/jquery/signUp",
+		type:'POST',
+		data :  $("#registerform").serialize(),
+		success:function(data){
+			if(data == 1){
+				alert("회원가입이 완료됐습니다.^^");
+				location.href = "/user/login"
+			}else if(data == 2){
+				alert("이미 존재하는 아이디입니다.");
+				return false;
+		}
+
+	})
+}
+
+
+
+function btn(sample){
+	alert(sample);
+	document.location.href="memberLogin.jsp";
+}
+
+
+
+</script>
+  <script src="/js/memberAddress.js"></script>
+  <script type="text/javascript" src="/js/memberJoin.js"></script>
+</head>
+<style>
+	@font-face {
+		 font-family: 'NanumBarunGothic';
+		 font-style: normal;
+		 font-weight: 400;
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+		 src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+	}
+
+	.login-form {
+	  	width: 500px;
+	  	margin-right: auto;
+	    margin-left: auto;
+	    margin-top: 50px;
+	    padding: 20px;
+	  	text-align: center;
+	    border: none;
+	}
+
+	.i_d {
+		float: left;
+		font-weight: bold;
+	}
+
+	.id {
+		float: center;
+		text-align: left;
+	    font-size: 14px;
+	    padding: 10px;
+	    border: none;
+	  	border-bottom: 1px solid gray;
+	    width: 200px;
+	    margin-bottom: 10px;
+
+	}
+
+	.idcheck {
+	   	  width: 65px;
+	   	  height: 32px;
+	   	  background-color: white;
+	   	  border-radius: 25px;
+	   	  border-color: gray;
+	   	  cursor:pointer;
+	}
+
+	.passwd {
+		float: left;
+		font-weight: bold;
+	}
+
+	.passwdche {
+		float: left;
+		font-weight: bold;
+	}
+
+	.pwd {
+		text-align: left;
+		float: center;
+	    font-size: 14px;
+	    padding: 10px;
+	    border: none;
+	  	border-bottom: 1px solid gray;
+	    width: 260px;
+	    margin-bottom: 10px;
+	    margin-left: -50px;
+	}
+
+	.pwdCheck {
+	  font-size: 14px;
+	  float: center;
+	  padding: 10px;
+	  border: none;
+	  border-bottom: 1px solid gray;
+	  width: 260px;
+	  margin-bottom: 10px;
+	  margin-left: -80px;
+	}
+
+	.Na {
+		float: left;
+		font-weight: bold;
+	}
+
+	.name {
+		float: center;
+	  font-size: 14px;
+      padding: 10px;
+      border: none;
+	  border-bottom: 1px solid gray;
+      width: 260px;
+      margin-bottom: 10px;
+      margin-left: -30px;
+	}
+
+
+	.adr {
+		float: left;
+		font-weight: bold;
+	}
+
+
+
+	.addresscheck {
+		background-color: white;
+	   	  border-radius: 25px;
+	   	  border-color: gray;
+	   	  cursor:pointer;
+	}
+
+	#sample4_postcode {
+	  font-size: 14px;
+	  padding: 10px;
+	  border: none;
+	  border-bottom: 1px solid gray;
+	  width: 220px;
+	  margin-bottom: 10px;
+	}
+
+	#sample4_roadAddress {
+	  font-size: 14px;
+	  padding: 10px;
+	  border: none;
+	  border-bottom: 1px solid gray;
+	  width: 260px;
+	  margin-bottom: 10px;
+	}
+
+	#sample4_jibunAddress {
+	  font-size: 14px;
+	  padding: 10px;
+	  border: none;
+	  border-bottom: 1px solid gray;
+	  width: 260px;
+	  margin-bottom: 10px;
+	}
+
+	#sample4_detailAddress {
+	  font-size: 14px;
+	  padding: 10px;
+	  border: none;
+	  border-bottom: 1px solid gray;
+	  width: 260px;
+	  margin-bottom: 10px;
+	}
+
+	.join {
+	  font-size: 14px;
+	  border: 3px solid gray;
+	  padding: 10px;
+	  width: 260px;
+	  background-color: white;
+	  margin-bottom: 30px;
+	  color: black;
+	  cursor:pointer;
+	}
+
+	.Administrator_Login {
+	  background-color: white;
+	  font-size: 15px;
+	  border: none;
+	}
+
+	.title {
+	  color: gray;
+	}
+
+	.dat {
+		float: left;
+		font-weight: bold;
+	}
+
+	.date {
+		float: left;
+		font-weight: bold;
+	  	font-size: 14px;
+	  	color: gray;
+	}
+
+
+	p {
+	  font-size: 13px;
+	  color: gray;
+		padding: 10px;
+	}
+
+	.gen {
+		float: left;
+		font-weight: bold;
+	}
+
+	.col-tit {
+		float: left;
+		font-weight: bold;
+		padding-top: 20px;
+
+	}
+
+	.col-content {
+		font-size: 14px;
+      	padding: 10px;
+      	border: none;
+      	width: 260px;
+      	margin-bottom: 10px;
+	}
+
+	#HPhone1 {
+		text-align: left;
+		font-size: 14px;
+	    padding: 10px;
+	    border: none;
+	  	border-bottom: 1px solid gray;
+	    width: 50px;
+	    margin-bottom: 10px;
+	}
+
+	#HPhone2 {
+		text-align: left;
+		font-size: 14px;
+	    padding: 10px;
+	    border: none;
+	  	border-bottom: 1px solid gray;
+	    width: 50px;
+	    margin-bottom: 10px;
+	}
+
+	.inpTxt {
+		text-align: left;
+		font-size: 14px;
+	    padding: 10px;
+	    border: none;
+	  	border-bottom: 1px solid gray;
+	    width: 80px;
+	    margin-bottom: 10px;
+	}
+
+	.select_email {
+		text-align: center;
+		width: 85px;
+		height: 32px;
+		line-height: 32px;
+	}
+
+	.MS_select {
+		text-align: center;
+		width: 60px;
+		height: 32px;
+		line-height: 32px;
+	}
+
+	.col_select {
+		text-align: center;
+		width: 50px;
+		height: 32px;
+		line-height: 32px;
+	}
+
+</style>
+<body>
+<header th:insert="header.html"></header>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js">
+    function openZipSearch() {
+  new  daum.Postcod( {
+    oncomplete: function(data) {
+      $('[name=zip]').val(data.zonecod);
+      $('[name=addr1]').val(data.address);
+      $('[name=addr2]').val(data.buildingName);
+    }
+  }).open();
+}
+  </script>
+
+<div class="login-form">
+  <h2 align="center">Join</h2>
+  <form action="/userJoin" method="post">
+    <a class="i_d">아이디</a>
+    <input type="text" class="id" name="username">
+    <input type="submit" class="idcheck" name="username" onclick="openIdChk()" value="중복확인">&nbsp;<br>
+    <a class="passwd">비밀번호</a>
+    <input type="password" class="pwd" name="password" ><br>
+    <a class="passwdche">비밀번호확인</a>
+    <input type="password" class="pwdCheck"  ><br>
+    <a class="Na">이름</a>
+    <input type="text" class="name" name="name" ><br>
+    <a class="adr">주소</a>
+    <input type="text" id="sample4_postcode" name="address" placeholder="우편번호">
+    <input type="button" class="addresscheck" onclick="sample4_execDaumPostcode()" value="찾기"><br>
+    <input type="text" id="sample4_roadAddress" name="address"  placeholder="도로명주소" size="60" ><br>
+    <input type="hidden" id="sample4_jibunAddress" name="address" placeholder="지번주소"  size="60">
+    <span id="guide" style="color:#999;display:none"></span>
+    <input type="text" id="sample4_detailAddress" name="address"  placeholder="상세주소"  size="60"><br>
+    <input type="hidden" id="sample4_extraAddress" placeholder="참고항목"  size="60">
+    <input type="hidden" id="sample4_engAddress" placeholder="영문주소"  size="60" ><br>
+    <br>
+    <div class="birth">
+      <a class="dat">생년월일</a>
+      <input type="hidden" class="date" name="date">
+      <select name="date"  class="MS_select MS_birthday">
+        <option value="">생년</option>
+        <option value="1920">1920</option>
+        <option value="1921">1921</option>
+        <option value="1922">1922</option>
+        <option value="1923">1923</option>
+        <option value="1924">1924</option>
+        <option value="1925">1925</option>
+        <option value="1926">1926</option>
+        <option value="1927">1927</option>
+        <option value="1928">1928</option>
+        <option value="1929">1929</option>
+        <option value="1930">1930</option>
+        <option value="1931">1931</option>
+        <option value="1932">1932</option>
+        <option value="1933">1933</option>
+        <option value="1934">1934</option>
+        <option value="1935">1935</option>
+        <option value="1936">1936</option>
+        <option value="1937">1937</option>
+        <option value="1938">1938</option>
+        <option value="1939">1939</option>
+        <option value="1940">1940</option>
+        <option value="1941">1941</option>
+        <option value="1942">1942</option>
+        <option value="1943">1943</option>
+        <option value="1944">1944</option>
+        <option value="1945">1945</option>
+        <option value="1946">1946</option>
+        <option value="1947">1947</option>
+        <option value="1948">1948</option>
+        <option value="1949">1949</option>
+        <option value="1950">1950</option>
+        <option value="1951">1951</option>
+        <option value="1952">1952</option>
+        <option value="1953">1953</option>
+        <option value="1954">1954</option>
+        <option value="1955">1955</option>
+        <option value="1956">1956</option>
+        <option value="1957">1957</option>
+        <option value="1958">1958</option>
+        <option value="1959">1959</option>
+        <option value="1960">1960</option>
+        <option value="1961">1961</option>
+        <option value="1962">1962</option>
+        <option value="1963">1963</option>
+        <option value="1964">1964</option>
+        <option value="1965">1965</option>
+        <option value="1966">1966</option>
+        <option value="1967">1967</option>
+        <option value="1968">1968</option>
+        <option value="1969">1969</option>
+        <option value="1970">1970</option>
+        <option value="1971">1971</option>
+        <option value="1972">1972</option>
+        <option value="1973">1973</option>
+        <option value="1974">1974</option>
+        <option value="1975">1975</option>
+        <option value="1976">1976</option>
+        <option value="1977">1977</option>
+        <option value="1978">1978</option>
+        <option value="1979">1979</option>
+        <option value="1980">1980</option>
+        <option value="1981">1981</option>
+        <option value="1982">1982</option>
+        <option value="1983">1983</option>
+        <option value="1984">1984</option>
+        <option value="1985">1985</option>
+        <option value="1986">1986</option>
+        <option value="1987">1987</option>
+        <option value="1988">1988</option>
+        <option value="1989">1989</option>
+        <option value="1990">1990</option>
+        <option value="1991">1991</option>
+        <option value="1992">1992</option>
+        <option value="1993">1993</option>
+        <option value="1994">1994</option>
+        <option value="1995">1995</option>
+        <option value="1996">1996</option>
+        <option value="1997">1997</option>
+        <option value="1998">1998</option>
+        <option value="1999">1999</option>
+        <option value="2000">2000</option>
+        <option value="2001">2001</option>
+        <option value="2002">2002</option>
+        <option value="2003">2003</option>
+        <option value="2004">2004</option>
+        <option value="2005">2005</option>
+        <option value="2006">2006</option>
+        <option value="2007">2007</option>
+        <option value="2008">2008</option>
+        <option value="2009">2009</option>
+        <option value="2010">2010</option>
+        <option value="2011">2011</option>
+        <option value="2012">2012</option>
+        <option value="2013">2013</option>
+        <option value="2014">2014</option>
+        <option value="2015">2015</option>
+        <option value="2016">2016</option>
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+      </select>
+      년
+      <select name="date" class="MS_select MS_birthday">
+        <option value="">월</option>
+        <option value="01">1</option>
+        <option value="02">2</option>
+        <option value="03">3</option>
+        <option value="04">4</option>
+        <option value="05">5</option>
+        <option value="06">6</option>
+        <option value="07">7</option>
+        <option value="08">8</option>
+        <option value="09">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>
+      월
+      <select name="date"  class="MS_select MS_birthday">
+        <option value="">일</option>
+        <option value="01">1</option>
+        <option value="02">2</option>
+        <option value="03">3</option>
+        <option value="04">4</option>
+        <option value="05">5</option>
+        <option value="06">6</option>
+        <option value="07">7</option>
+        <option value="08">8</option>
+        <option value="09">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+        <option value="23">23</option>
+        <option value="24">24</option>
+        <option value="25">25</option>
+        <option value="26">26</option>
+        <option value="27">27</option>
+        <option value="28">28</option>
+        <option value="29">29</option>
+        <option value="30">30</option>
+        <option value="31">31</option>
+      </select>
+      일
+    </div>
+    <br>
+    <a class="gen">성별</a>
+    <input type="radio" name="gender" class="MS_radio" value="1"/>
+    <a class="gender">남</a>
+    <input type="radio" name="gender" class="MS_radio" value="2"/>
+    <a class="gender">여</a>
+
+    <br>
+    <div class="col-tit">휴대폰</div>
+    <div class="col-content">
+      <select class="col_select" name="phone"  >
+        <option value="010">010</option>
+        <option value="011">011</option>
+        <option value="016">016</option>
+      </select>
+      -
+      <input type="text" id="HPhone1" class="inpTxt" name="phone" >
+      -
+      <input type="text" id="HPhone2" class="inpTxt" name="phone" >
+    </div>
+    <div class="col-tit">이메일</div>
+    <div class="col-content">
+      <input type="text" id="Email1" class="inpTxt" name="email" >
+      @
+      <input type="text" id="Email2" class="inpTxt" name="email" >
+      <select class="select_email" name="email" >
+        <option value="naver.com">naver.com</option>
+        <option value="gmail.com">gmail.com</option>
+        <option value="daum.net">daum.net</option>
+      </select>
+      <input type="checkbox" id="mail_agree">
+      <label for="mail_agree">이메일수신동의</label>
+    </div>
+    <input type="submit" class="join" value="가입하기">
+    <input name="${_csrf.parameterName}" type="hidden" value="${_crsf.token}">
+  </form>
+</div>
+<footer th:insert="footer.html"></footer>
+
+<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+</body>
+</html>
